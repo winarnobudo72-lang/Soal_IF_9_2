@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CBT Informatika Kelas IX - SMP Negeri 2 Ngadirejo</title>
+<style>
+:root{--navy:#14213d;--blue:#2563eb;--cyan:#06b6d4;--bg:#f3f6fb;--ink:#172033;--muted:#64748b;--line:#dbe3ef;--green:#16a34a;--red:#dc2626;--amber:#d97706}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 "Segoe UI",Arial,sans-serif}
+header{background:linear-gradient(120deg,#14213d,#1d4ed8 70%,#0891b2);color:white;padding:24px 5%;box-shadow:0 5px 20px #10204025}
+.head{max-width:1200px;margin:auto;display:flex;justify-content:space-between;gap:20px;align-items:center;flex-wrap:wrap}
+h1{font-size:clamp(21px,3vw,30px);margin:0 0 5px}.sub{opacity:.9}.pill{display:inline-block;background:#ffffff20;border:1px solid #ffffff50;padding:6px 12px;border-radius:30px;font-size:12px}
+main{max-width:1200px;margin:22px auto;padding:0 16px}.panel{background:white;border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:0 8px 24px #1e293b0a;margin-bottom:18px}
+.identity{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.field label{display:block;font-weight:650;margin-bottom:5px}.field input,.field select{width:100%;padding:11px 12px;border:1px solid #cbd5e1;border-radius:9px;font:inherit}
+button{border:0;border-radius:10px;padding:11px 16px;font-weight:700;cursor:pointer;font:inherit;transition:.15s}button:disabled{opacity:.45;cursor:not-allowed}.primary{background:var(--blue);color:white}.secondary{background:#e8eef8;color:#1e3a8a}.danger{background:#fee2e2;color:#991b1b}.success{background:#dcfce7;color:#166534}
+.toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.stats{display:flex;gap:10px;flex-wrap:wrap}.stat{background:#f1f5f9;border-radius:10px;padding:8px 12px;min-width:110px}.stat small{display:block;color:var(--muted)}.stat strong{font-size:19px;font-variant-numeric:tabular-nums}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:18px;align-items:start}.question-card{min-height:380px}.qtop{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;color:var(--muted);font-size:13px}.qtext{font-size:18px;font-weight:650;margin:17px 0}.qvisual{margin:12px 0;padding:12px;background:#f8fafc;border:1px solid var(--line);border-radius:10px;overflow:auto}.qvisual table{border-collapse:collapse;width:100%;background:white}.qvisual td,.qvisual th{border:1px solid #cbd5e1;padding:7px;text-align:center}.code{font-family:Consolas,monospace;white-space:pre-wrap;background:#0f172a;color:#e2e8f0;padding:14px;border-radius:10px}
+.options{display:grid;gap:10px}.option{display:flex;gap:10px;align-items:flex-start;padding:12px;border:1px solid var(--line);border-radius:10px;cursor:pointer}.option:hover{border-color:#60a5fa;background:#f8fbff}.option input{margin-top:5px;accent-color:var(--blue)}.option.selected{border-color:var(--blue);background:#eff6ff}
+.navgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;margin-top:12px}.navgrid button{padding:8px 0;background:#e2e8f0;color:#334155}.navgrid button.answered{background:#bfdbfe;color:#1e40af}.navgrid button.current{outline:3px solid #2563eb}.navgrid button.flag{box-shadow:inset 0 -4px #f59e0b}
+.actions{display:flex;gap:9px;justify-content:space-between;flex-wrap:wrap;margin-top:20px}.warning{background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;border-radius:10px;padding:11px 13px;margin:12px 0;font-size:13px}.hidden{display:none!important}.progress{height:8px;background:#e2e8f0;border-radius:99px;overflow:hidden;margin-top:10px}.progress>div{height:100%;background:linear-gradient(90deg,#2563eb,#06b6d4);width:0}
+#timer.urgent{color:var(--red)}.result-score{font-size:48px;font-weight:800;color:#1d4ed8}.resultgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.resultgrid>div{background:#f1f5f9;border-radius:10px;padding:12px}
+footer{text-align:center;color:var(--muted);padding:24px;font-size:12px}
+@media(max-width:800px){.layout{grid-template-columns:1fr}.identity{grid-template-columns:1fr}.navgrid{grid-template-columns:repeat(8,1fr)}.resultgrid{grid-template-columns:1fr 1fr}}
+@media print{header,.no-print,#examPanel,#startPanel,footer{display:none!important}body{background:white}.panel{box-shadow:none;border:0}#resultPanel{display:block!important}}
+</style>
+</head>
+<body>
+<header><div class="head"><div><h1>ASESMEN INFORMATIKA KELAS IX</h1><div class="sub">SMP NEGERI 2 NGADIREJO · Semester 1 · Guru: Budi Winarno, S.Kom.</div></div><div><span class="pill">KKTP 80</span> <span class="pill">CBT · 60 menit</span></div></div></header>
+<main>
+<section class="panel" id="startPanel">
+<h2>Petunjuk dan Identitas Peserta</h2>
+<p>Bank soal berisi 60 butir. Sistem menampilkan 50 soal secara acak: <b>40 pilihan ganda reguler dan 10 soal HOTS</b>. Urutan soal dan pilihan jawaban diacak.</p>
+<div class="identity">
+<div class="field"><label for="student">Nama lengkap</label><input id="student" placeholder="Masukkan nama peserta"></div>
+<div class="field"><label for="className">Kelas</label><select id="className"><option value="">Pilih kelas</option><option>IX A</option><option>IX B</option><option>IX C</option><option>IX D</option><option>IX E</option><option>IX F</option><option>IX G</option></select></div>
+<div class="field"><label for="duration">Durasi</label><input id="duration" value="60 menit" disabled></div>
+</div>
+<div class="warning"><b>Aturan ujian:</b> Waktu maksimal 60 menit. Tombol kumpulkan baru aktif setelah 10 menit sejak ujian dimulai. Perpindahan tab/aplikasi atau keluar dari layar penuh akan dihitung sebagai pelanggaran. Pada pelanggaran ke-3, ujian dihentikan dan jawaban yang tersimpan dinilai.</div>
+<ul><li>Jawablah semua soal dengan teliti. Gunakan navigasi nomor untuk berpindah soal.</li><li>Jawaban tersimpan otomatis pada perangkat/browser ini.</li><li>Aktifkan layar penuh saat memulai. Fitur ini merupakan pengawasan berbasis browser, bukan pengunci perangkat.</li></ul>
+<button class="primary" id="startBtn">Mulai Ujian dan Aktifkan Fullscreen</button>
+</section>
+
+<section class="panel hidden" id="examPanel">
+<div class="toolbar">
+<div class="stats">
+<div class="stat"><small>Sisa waktu</small><strong id="timer">60:00</strong></div>
+<div class="stat"><small>Waktu berjalan</small><strong id="elapsed">00:00</strong></div>
+<div class="stat"><small>Terjawab</small><strong id="answeredCount">0/50</strong></div>
+<div class="stat"><small>Pelanggaran</small><strong id="strikes">0/3</strong></div>
+</div>
+<div><span class="pill" style="background:#e0f2fe;color:#075985;border:0" id="clock">--:--:--</span></div>
+</div>
+<div class="progress"><div id="progressBar"></div></div>
+<div class="layout" style="margin-top:18px">
+<div class="panel question-card" style="margin:0">
+<div class="qtop"><span id="qNumber">Soal 1 dari 50</span><span id="qType">Pilihan Ganda</span></div>
+<div class="qtext" id="qText"></div>
+<div id="qVisual"></div>
+<div class="options" id="options"></div>
+<div class="actions">
+<button class="secondary" id="prevBtn">← Sebelumnya</button>
+<button class="secondary" id="flagBtn">☆ Tandai</button>
+<button class="primary" id="nextBtn">Berikutnya →</button>
+</div>
+</div>
+<aside class="panel" style="margin:0">
+<b>Navigasi soal</b><div class="navgrid" id="navGrid"></div>
+<p style="font-size:12px;color:#64748b">Biru: sudah dijawab · Garis oranye: ditandai · Bingkai: soal aktif.</p>
+<button class="success" id="submitBtn" disabled style="width:100%;margin-top:10px">Kumpulkan Jawaban</button>
+<p id="submitHint" style="font-size:12px;color:#64748b">Tombol aktif setelah 10 menit.</p>
+</aside>
+</div>
+<div class="warning" id="warningBox">Jawaban tersimpan otomatis pada browser ini.</div>
+</section>
+
+<section class="panel hidden" id="resultPanel">
+<h2 id="resultTitle">Hasil Asesmen</h2>
+<div class="result-score" id="score">0</div><div id="statusText"></div>
+<div class="resultgrid" style="margin:18px 0">
+<div><small>Benar</small><h3 id="correct">0</h3></div><div><small>Salah/kosong</small><h3 id="wrong">0</h3></div><div><small>Waktu digunakan</small><h3 id="usedTime">00:00</h3></div>
+</div>
+<p id="resultMeta"></p>
+<div class="actions no-print">
+<button class="primary" id="downloadBtn">Unduh Hasil (.json)</button>
+<button class="secondary" id="csvBtn">Unduh Rekap (.csv)</button>
+<button class="secondary" onclick="window.print()">Cetak Hasil</button>
+</div>
+<div id="review" style="margin-top:20px"></div>
+</section>
+</main>
+<footer>CBT Informatika · SMP Negeri 2 Ngadirejo · Jawaban disimpan lokal pada browser perangkat peserta.</footer>
+<script>
+const bank = [
+{t:"Berpikir komputasional adalah pendekatan untuk ....",o:["menyelesaikan masalah secara sistematis dengan konsep ilmu komputer","menghafalkan seluruh perintah komputer","mengganti semua pekerjaan manusia","memperbaiki perangkat keras saja"],a:0,topic:"Berpikir Komputasional"},
+{t:"Perhatikan deret berikut: 3, 6, 9, 12, .... Bilangan berikutnya adalah ....",o:["13","14","15","18"],a:2,topic:"Pengenalan pola"},
+{t:"Memecah proyek pembuatan majalah digital menjadi tugas menulis, mengedit gambar, dan menyusun halaman merupakan contoh ....",o:["abstraksi","dekomposisi","simulasi","enkripsi"],a:1,topic:"Dekomposisi"},
+{t:"Saat membuat peta rute sekolah, informasi yang paling penting untuk ditampilkan adalah ....",o:["warna semua kendaraan","merek telepon pengguna","rute jalan dan lokasi tujuan","nama seluruh penduduk"],a:2,topic:"Abstraksi"},
+{t:"Dalam tabel data nilai, fungsi kolom umumnya adalah ....",o:["menyimpan satu jenis atribut/data","menunjukkan satu peserta saja","menghapus data ganda","mengurutkan halaman"],a:0,topic:"Tabel data"},
+{t:"Nilai 70, 80, dan 90 memiliki rata-rata ....",o:["75","80","85","90"],a:1,topic:"Pengolahan data"},
+{t:"Urutan nama secara alfabetis dari Andi, Citra, Beni adalah ....",o:["Andi, Beni, Citra","Beni, Andi, Citra","Citra, Beni, Andi","Andi, Citra, Beni"],a:0,topic:"Sorting"},
+{t:"Data jumlah buku yang dibaca: Ani 4, Bima 7, Cici 5. Kesimpulan yang tepat adalah ....",o:["Ani membaca paling banyak","Bima membaca paling banyak","Cici membaca paling banyak","semua sama"],a:1,topic:"Analisis data"},
+{t:"Untuk menemukan nama siswa tertentu dalam daftar panjang yang sudah terurut, metode yang efisien adalah ....",o:["menebak","binary search/pencarian biner","menghapus sebagian daftar","mengacak daftar"],a:1,topic:"Searching"},
+{t:"Jumlah pengunjung perpustakaan Senin–Rabu adalah 20, 25, 30. Jika pola tetap, perkiraan Kamis ....",o:["25","30","35","40"],a:2,topic:"Pola data"},
+{t:"Data perubahan suhu setiap jam paling tepat disajikan menggunakan ....",o:["diagram garis","diagram lingkaran saja","poster","peta wilayah"],a:0,topic:"Representasi data"},
+{t:"Diagram batang menunjukkan kelas IX A mengumpulkan 12 botol, IX B 18 botol, IX C 15 botol. Interpretasi yang benar ....",o:["IX A terbanyak","IX B terbanyak","IX C terbanyak","semua sama"],a:1,topic:"Interpretasi data"},
+{t:"Untuk membandingkan nilai Matematika dan Informatika setiap siswa, tabel sebaiknya memiliki kolom ....",o:["nama, nilai Matematika, nilai Informatika","nama orang tua saja","alamat rumah saja","nomor sepatu"],a:0,topic:"Tabel data"},
+{t:"Pengelompokan data berdasarkan jenis perangkat (komputer, tablet, ponsel) disebut ....",o:["klasifikasi","kompresi","duplikasi","transmisi"],a:0,topic:"Klasifikasi data"},
+{t:"Urutkan data 14, 5, 22, 9 dari terkecil ke terbesar.",o:["5, 9, 14, 22","22, 14, 9, 5","5, 14, 9, 22","9, 5, 22, 14"],a:0,topic:"Sorting"},
+{t:"Data peminjaman menunjukkan buku sains paling sering dipinjam. Keputusan yang paling didukung data adalah ....",o:["mengurangi koleksi sains","menambah atau memperbarui koleksi sains","menutup perpustakaan","menghapus catatan peminjaman"],a:1,topic:"Keputusan berbasis data"},
+{t:"Perhatikan tabel berikut.",v:'<table><tr><th>Nama</th><th>Nilai</th></tr><tr><td>Raka</td><td>78</td></tr><tr><td>Sinta</td><td>92</td></tr><tr><td>Wawan</td><td>85</td></tr></table>',o:["78","85","92","255"],a:2,topic:"Nilai terbesar"},
+{t:"Manfaat utama analisis data adalah ....",o:["membantu mengambil keputusan berdasarkan informasi","membuat data selalu benar tanpa pemeriksaan","menghilangkan kebutuhan berpikir","mengubah semua data menjadi gambar"],a:0,topic:"Manfaat analisis data"},
+{t:"Data kehadiran: Senin 30, Selasa 30, Rabu 28. Pernyataan yang paling tepat adalah ....",o:["kehadiran selalu meningkat","Rabu memiliki jumlah hadir paling sedikit","Selasa paling sedikit","data tidak dapat dibandingkan"],a:1,topic:"Interpretasi data"},
+{t:"Algoritma adalah ....",o:["urutan langkah logis untuk menyelesaikan masalah","nama perangkat input","kumpulan gambar","jenis jaringan internet"],a:0,topic:"Algoritma"},
+{t:"Mengapa urutan instruksi penting dalam algoritma membuat teh?",o:["agar langkah dilakukan secara runtut dan hasil sesuai","agar instruksi lebih panjang","agar bahan tidak perlu disiapkan","agar hasil selalu acak"],a:0,topic:"Urutan instruksi"},
+{t:"Urutan pseudocode menghitung luas persegi panjang yang benar adalah ....",o:["INPUT p,l; luas←p*l; OUTPUT luas","OUTPUT luas; INPUT p,l; luas←p+l","luas←p+l; INPUT luas; OUTPUT p","INPUT luas; OUTPUT p*l"],a:0,topic:"Pseudocode"},
+{t:"Pada flowchart, simbol belah ketupat digunakan untuk ....",o:["proses","keputusan/percabangan","mulai atau selesai","input/output"],a:1,topic:"Flowchart"},
+{t:"Dalam program menghitung luas, panjang dan lebar yang dimasukkan pengguna merupakan ....",o:["output","input","proses akhir","komentar"],a:1,topic:"Input/Output"},
+{t:"Jika x=8 dan y=3, hasil x+y*2 adalah ....",o:["22","14","19","16"],a:1,topic:"Operator aritmetika"},
+{t:"Variabel dalam program berfungsi untuk ....",o:["menyimpan nilai/data yang dapat digunakan program","menampilkan perangkat keras","menghubungkan kabel","menghapus sistem operasi"],a:0,topic:"Variabel"},
+{t:"Hasil dari 17 % 5 adalah ....",o:["2","3","5","12"],a:0,topic:"Modulo"},
+{t:"Jika nilai=75 dan syarat lulus nilai>=80, keluaran kondisi if-else adalah ....",o:["Lulus","Belum lulus","Nilai 80","Tidak ada keluaran"],a:1,topic:"If-else"},
+{t:"Struktur perulangan digunakan untuk ....",o:["menjalankan instruksi berulang sesuai ketentuan","menghentikan komputer","mengganti monitor","menghapus variabel"],a:0,topic:"Perulangan"},
+{t:"Ekspresi (8>5) AND (3>7) menghasilkan ....",o:["True","False","8","15"],a:1,topic:"Operator logika"},
+{t:"Jika a=4, lalu a=a+3, kemudian a=a*2, nilai akhir a adalah ....",o:["7","11","14","18"],a:2,topic:"Variabel dan operator"},
+{t:"Program seharusnya menampilkan jumlah dua bilangan, tetapi menggunakan operator pengurangan. Tindakan yang tepat disebut ....",o:["debugging","browsing","formatting","uploading"],a:0,topic:"Debugging"},
+{t:"Perhatikan instruksi berikut.",v:'<div class="code">x ← 5<br>y ← x + 4<br>x ← y - 2<br>OUTPUT x</div>',o:["5","7","9","11"],a:1,topic:"Penelusuran program"},
+{t:"Program memeriksa suhu. Jika suhu>30 tampilkan 'Panas', selain itu 'Normal'. Jika suhu 28, jalur yang dijalankan adalah ....",o:["Panas","Normal","keduanya","tidak ada"],a:1,topic:"Percabangan"},
+{t:"Contoh bahasa pemrograman yang umum digunakan untuk belajar pemrograman adalah ....",o:["Python","JPEG","HDMI","Bluetooth"],a:0,topic:"Bahasa pemrograman"},
+{t:"Hasil perbandingan 12 <= 10 adalah ....",o:["True","False","12","10"],a:1,topic:"Operator perbandingan"},
+{t:"Tujuan program adalah menampilkan 'Lulus' jika nilai minimal 80. Baris kondisi yang tepat adalah ....",o:["if nilai < 80","if nilai >= 80","if nilai = 0","if nilai > 100"],a:1,topic:"Debugging"},
+{t:"Perhatikan program berikut.",v:'<div class="code">n ← 2<br>REPEAT 3 TIMES<br>&nbsp; n ← n * 2<br>END REPEAT<br>OUTPUT n</div>',o:["6","8","12","16"],a:3,topic:"Penelusuran program"},
+{t:"Komponen berpikir komputasional yang mencari kesamaan dari beberapa persoalan adalah ....",o:["pengenalan pola","dekomposisi","abstraksi","komunikasi"],a:0,topic:"Komponen BK"},
+{t:"Urutan pengolahan data yang masuk akal adalah ....",o:["mengumpulkan, memeriksa, mengolah, menyajikan","menyajikan, menghapus, mengumpulkan","mengolah, mengarang, membuang","menghapus, menyimpulkan, mengumpulkan"],a:0,topic:"Pengolahan data"},
+{t:"Pernyataan yang benar tentang analisis data adalah ....",o:["data perlu ditafsirkan sesuai konteks","semua data pasti menunjukkan sebab-akibat","grafik tidak membutuhkan label","kesimpulan boleh bertentangan dengan data"],a:0,topic:"Analisis data"},
+{t:"Perhatikan data jumlah peserta ekstrakurikuler berikut.",v:'<table><tr><th>Ekskul</th><th>Jumlah</th></tr><tr><td>Pramuka</td><td>24</td></tr><tr><td>Basket</td><td>16</td></tr><tr><td>PMR</td><td>20</td></tr></table>',o:["Pramuka paling banyak diminati","Basket paling banyak diminati","PMR paling sedikit","semua sama"],a:0,topic:"Pola data"},
+{t:"Data nilai dapat dikelompokkan menjadi tuntas dan belum tuntas menggunakan kriteria ....",o:["batas nilai/KKTP","warna tas","urutan abjad nama","tanggal lahir"],a:0,topic:"Klasifikasi data"},
+{t:"Salah satu ciri algoritma yang baik adalah ....",o:["langkah jelas, logis, dan berhingga","instruksi ambigu","tidak memiliki tujuan","selalu membutuhkan internet"],a:0,topic:"Ciri algoritma"},
+{t:"Pernyataan yang tepat tentang input, proses, dan output adalah ....",o:["input data masuk, proses mengolah, output hasil","input hasil, proses menampilkan, output data masuk","ketiganya selalu sama","program tidak memerlukan input"],a:0,topic:"Unsur program"},
+{t:"Percabangan memungkinkan program ....",o:["memilih tindakan berdasarkan kondisi","mengulang tanpa batas selalu","menyimpan gambar saja","mengubah perangkat keras"],a:0,topic:"Percabangan"},
+{t:"Pernyataan yang benar tentang perulangan adalah ....",o:["menghindari penulisan instruksi sama berulang kali","hanya dapat digunakan untuk gambar","selalu membuat program berhenti","tidak memiliki kondisi"],a:0,topic:"Perulangan"},
+{t:"Kondisi A=True, B=False, C=True. Hasil (A AND B) OR C adalah ....",o:["True","False","Tidak terdefinisi","B"],a:0,topic:"Logika program"},
+{t:"Perhatikan potongan program.",v:'<div class="code">x ← 10<br>y ← 3<br>z ← x DIV y<br>r ← x MOD y<br>OUTPUT z, r</div>',o:["3 dan 1","3 dan 0","2 dan 1","4 dan 2"],a:0,topic:"Penelusuran program"},
+{t:"Sebuah program menghitung rata-rata tetapi membagi total nilai dengan jumlah mata pelajaran ditambah satu. Perbaikan paling tepat adalah ....",o:["membagi total dengan jumlah mata pelajaran yang benar","menghapus seluruh data nilai","mengganti penjumlahan dengan perkalian","menampilkan total saja sebagai rata-rata"],a:0,topic:"Debugging"},
+// 10 HOTS
+{t:"HOTS · Perhatikan data penggunaan air berikut. Hari ke-1 10 liter, hari ke-2 13 liter, hari ke-3 16 liter, hari ke-4 19 liter. Jika pola berlanjut, perkiraan hari ke-6 adalah ....",v:'<table><tr><th>Hari</th><th>1</th><th>2</th><th>3</th><th>4</th></tr><tr><td>Liter</td><td>10</td><td>13</td><td>16</td><td>19</td></tr></table>',o:["22 liter","25 liter","26 liter","28 liter"],a:1,topic:"HOTS · Pola dan prediksi",hot:true},
+{t:"HOTS · Perpustakaan ingin mengetahui jenis buku yang perlu ditambah. Data peminjaman: fiksi 40, sains 55, sejarah 25, komik 60. Keputusan paling rasional jika tujuan meningkatkan ketersediaan buku yang diminati adalah ....",o:["menambah komik dan sains berdasarkan angka peminjaman","menghapus buku sejarah","menambah semua jenis dengan jumlah sama tanpa pertimbangan","mengurangi komik karena paling banyak dipinjam"],a:0,topic:"HOTS · Keputusan berbasis data",hot:true},
+{t:"HOTS · Sebuah algoritma menghitung total belanja: harga=12000, jumlah=3, diskon=5000. Urutan proses yang benar agar total tepat adalah ....",o:["total=harga×jumlah; total=total-diskon; tampilkan total","total=harga+jumlah; tampilkan; kurangi diskon","total=diskon-harga×jumlah; tampilkan","tampilkan total sebelum menghitung"],a:0,topic:"HOTS · Algoritma",hot:true},
+{t:"HOTS · Siswa membuat program status kelulusan. Aturan: nilai 80 atau lebih lulus. Hasil uji menunjukkan nilai 80 justru belum lulus. Penyebab paling mungkin adalah kondisi yang memakai ....",o:["nilai > 80","nilai >= 80","nilai == 80 OR nilai > 80","nilai >= 0"],a:0,topic:"HOTS · Debugging kondisi",hot:true},
+{t:"HOTS · Data waktu tempuh ke sekolah (menit): 15, 18, 17, 45, 16. Satu nilai jauh lebih besar dari lainnya. Langkah analisis paling bertanggung jawab adalah ....",o:["langsung menghapus 45","memeriksa apakah 45 benar atau kesalahan pencatatan sebelum menyimpulkan","mengubah semua nilai menjadi 45","menyimpulkan semua siswa terlambat"],a:1,topic:"HOTS · Evaluasi data",hot:true},
+{t:"HOTS · Sebuah robot harus bergerak maju 4 langkah, berbelok, lalu maju 4 langkah. Agar instruksi maju tidak ditulis berulang secara berlebihan, konsep yang paling tepat adalah ....",o:["perulangan","penghapusan data","abstraksi warna","sorting"],a:0,topic:"HOTS · Efisiensi algoritma",hot:true},
+{t:"HOTS · Perhatikan tabel hasil kuis.",v:'<table><tr><th>Kelompok</th><th>Benar</th><th>Jumlah soal</th></tr><tr><td>A</td><td>18</td><td>20</td></tr><tr><td>B</td><td>24</td><td>30</td></tr><tr><td>C</td><td>16</td><td>20</td></tr></table>',o:["Kelompok A dan C memiliki persentase sama dan tertinggi","Kelompok B tertinggi","Kelompok C terendah","semua persentasenya sama"],a:0,topic:"HOTS · Interpretasi tabel",hot:true},
+{t:"HOTS · Program memberikan bonus jika pelanggan membeli minimal 5 barang ATAU total belanja minimal Rp100.000. Kondisi logika yang tepat adalah ....",o:["jumlah>=5 OR total>=100000","jumlah>=5 AND total>=100000","jumlah<5 OR total<100000","jumlah==5 AND total==0"],a:0,topic:"HOTS · Logika gabungan",hot:true},
+{t:"HOTS · Data nilai kelas adalah 65, 70, 80, 85, 100. Guru ingin mengetahui nilai tengah untuk mengurangi pengaruh nilai ekstrem. Ukuran yang tepat adalah ....",o:["median","modus","jumlah","jangkauan"],a:0,topic:"HOTS · Analisis statistik",hot:true},
+{t:"HOTS · Sebuah aplikasi absensi harus menerima nomor siswa, memeriksa apakah nomor terdaftar, lalu menampilkan status hadir atau tidak terdaftar. Rancangan paling tepat adalah ....",o:["input nomor → pencarian data → percabangan hasil → output status","output status → input nomor → hapus data","mengacak nomor → menampilkan semua data","mengulang input tanpa pemeriksaan"],a:0,topic:"HOTS · Rancangan solusi",hot:true}
+];
+
+let questions=[], answers={}, flags=new Set(), current=0, startAt=0, duration=3600, timerId=null, strikes=0, finished=false, violationReason="";
+const $=id=>document.getElementById(id);
+function shuffle(a){let b=[...a];for(let i=b.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
+function fmt(s){s=Math.max(0,Math.floor(s));return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')}
+function save(){if(!questions.length||finished)return;localStorage.setItem('cbt_informatika_ix_progress',JSON.stringify({student:$('student').value,kelas:$('className').value,questions:questions.map(q=>q.id),answers,flags:[...flags],startAt,strikes}))}
+function buildBank(){let regular=bank.map((q,i)=>({...q,id:i})).filter(q=>!q.hot);let hot=bank.map((q,i)=>({...q,id:i})).filter(q=>q.hot);questions=[...shuffle(regular).slice(0,40),...shuffle(hot).slice(0,10)];questions=shuffle(questions);answers={};flags.clear()}
+function renderNav(){$('navGrid').innerHTML='';questions.forEach((q,i)=>{let b=document.createElement('button');b.textContent=i+1;if(answers[q.id]!==undefined)b.classList.add('answered');if(i===current)b.classList.add('current');if(flags.has(q.id))b.classList.add('flag');b.onclick=()=>{current=i;renderQuestion()};$('navGrid').appendChild(b)})}
+function renderQuestion(){let q=questions[current];$('qNumber').textContent=`Soal ${current+1} dari 50`; $('qType').textContent=q.hot?'Pilihan Ganda HOTS':'Pilihan Ganda';$('qText').textContent=q.t;$('qVisual').innerHTML=q.v?'<div class="qvisual">'+q.v+'</div>':'';$('options').innerHTML='';
+let opts=shuffle(q.o.map((text,i)=>({text,correct:i===q.a})));q._opts=opts;
+opts.forEach((op,i)=>{let lab=document.createElement('label');lab.className='option'+(answers[q.id]===op.text?' selected':'');let inp=document.createElement('input');inp.type='radio';inp.name='answer';inp.checked=answers[q.id]===op.text;inp.onchange=()=>{answers[q.id]=op.text;save();renderQuestion()};let span=document.createElement('span');span.textContent=String.fromCharCode(65+i)+'. '+op.text;lab.append(inp,span);$('options').appendChild(lab)});
+$('prevBtn').disabled=current===0;$('nextBtn').disabled=current===49;$('flagBtn').textContent=flags.has(q.id)?'★ Hapus tanda':'☆ Tandai';$('answeredCount').textContent=Object.keys(answers).length+'/50';$('progressBar').style.width=(Object.keys(answers).length/50*100)+'%';renderNav()}
+function tick(){let elapsed=Math.floor((Date.now()-startAt)/1000),left=duration-elapsed;$('elapsed').textContent=fmt(elapsed);$('timer').textContent=fmt(left);$('timer').classList.toggle('urgent',left<=300);$('clock').textContent=new Date().toLocaleTimeString('id-ID');$('submitBtn').disabled=elapsed<600;if(elapsed>=600)$('submitHint').textContent='Anda sudah dapat mengumpulkan jawaban.';if(left<=0)finish('Waktu habis');}
+function violation(reason){if(finished)return;strikes++;$('strikes').textContent=strikes+'/3';$('warningBox').textContent=`PERINGATAN ${strikes}/3: ${reason}. Tetap fokus pada halaman ujian.`;save();if(strikes>=3)finish('Ujian dihentikan karena mencapai 3 pelanggaran.')}
+async function begin(){if(!$('student').value.trim()||!$('className').value){alert('Lengkapi nama dan kelas terlebih dahulu.');return}buildBank();startAt=Date.now();strikes=0;finished=false;$('startPanel').classList.add('hidden');$('examPanel').classList.remove('hidden');renderQuestion();timerId=setInterval(tick,500);tick();try{await document.documentElement.requestFullscreen()}catch(e){$('warningBox').textContent='Browser tidak mengizinkan fullscreen. Ujian tetap berjalan; gunakan mode layar penuh secara manual.'}save()}
+function finish(reason='Dikumpulkan peserta'){if(finished)return;finished=true;clearInterval(timerId);violationReason=reason;try{if(document.fullscreenElement)document.exitFullscreen()}catch(e){}$('examPanel').classList.add('hidden');$('resultPanel').classList.remove('hidden');let correct=0;questions.forEach(q=>{if(answers[q.id]!==undefined&&q.o[q.a]===answers[q.id])correct++});let score=Math.round(correct/50*100);$('score').textContent=score;$('correct').textContent=correct;$('wrong').textContent=50-correct;$('usedTime').textContent=fmt((Date.now()-startAt)/1000);$('statusText').innerHTML=score>=80?'<b style="color:#15803d">TUNTAS · Mencapai KKTP 80</b>':'<b style="color:#b91c1c">BELUM TUNTAS · Belum mencapai KKTP 80</b>';$('resultMeta').textContent=`Peserta: ${$('student').value} · Kelas: ${$('className').value} · Keterangan: ${reason} · Pelanggaran: ${strikes}/3`;$('resultTitle').textContent='Hasil Asesmen Informatika';let rev='<h3>Ringkasan jawaban</h3><ol>';questions.forEach((q,i)=>{let ok=answers[q.id]===q.o[q.a];rev+=`<li style="margin:8px 0"><b>${q.t}</b><br>Jawaban: ${answers[q.id]??'Tidak dijawab'} · <span style="color:${ok?'green':'#b91c1c'}">${ok?'Benar':'Belum tepat'}</span></li>`});$('review').innerHTML=rev+'</ol>';let result={sekolah:'SMP Negeri 2 Ngadirejo',mapel:'Informatika',kelas:$('className').value,nama:$('student').value,guru:'Budi Winarno, S.Kom.',kktp:80,nilai:score,benar:correct,salah:50-correct,waktu:fmt((Date.now()-startAt)/1000),alasan:reason,pelanggaran:strikes,jawaban:questions.map((q,i)=>({nomor:i+1,soal:q.t,jawaban:answers[q.id]??null,kunci:q.o[q.a],benar:answers[q.id]===q.o[q.a]}))};window.finalResult=result;localStorage.setItem('cbt_informatika_ix_result',JSON.stringify(result));localStorage.removeItem('cbt_informatika_ix_progress')}
+$('startBtn').onclick=begin;$('prevBtn').onclick=()=>{if(current>0){current--;renderQuestion()}};$('nextBtn').onclick=()=>{if(current<49){current++;renderQuestion()}};$('flagBtn').onclick=()=>{let id=questions[current].id;flags.has(id)?flags.delete(id):flags.add(id);save();renderQuestion()};$('submitBtn').onclick=()=>{if(Object.keys(answers).length<50&&!confirm(`Masih ada ${50-Object.keys(answers).length} soal belum dijawab. Tetap kumpulkan?`))return;if(!confirm('Yakin mengumpulkan jawaban?'))return;finish()};
+document.addEventListener('visibilitychange',()=>{if(!document.hidden&&startAt&&!finished)return;if(document.hidden&&startAt&&!finished)violation('Berpindah tab atau aplikasi')});
+document.addEventListener('fullscreenchange',()=>{if(startAt&&!finished&&!document.fullscreenElement)violation('Keluar dari mode layar penuh')});
+window.addEventListener('beforeunload',e=>{if(startAt&&!finished){save();e.preventDefault();e.returnValue='Ujian masih berlangsung.'}});
+$('downloadBtn').onclick=()=>download('hasil-cbt-informatika.json',JSON.stringify(window.finalResult,null,2),'application/json');
+$('csvBtn').onclick=()=>{let r=window.finalResult;let rows=[['Nama','Kelas','Nilai','Benar','Salah','Waktu'],[r.nama,r.kelas,r.nilai,r.benar,r.salah,r.waktu],[],['No','Soal','Jawaban Peserta','Kunci','Benar']];r.jawaban.forEach(x=>rows.push([x.nomor,x.soal,x.jawaban||'',x.kunci,x.benar?'Ya':'Tidak']));download('rekap-cbt-informatika.csv',rows.map(row=>row.map(x=>'"'+String(x??'').replaceAll('"','""')+'"').join(',')).join('\n'),'text/csv')};
+function download(name,data,type){let blob=new Blob([data],{type}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.click();URL.revokeObjectURL(url)}
+</script>
+</body></html>
